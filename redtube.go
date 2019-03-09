@@ -13,7 +13,7 @@ import (
 const apiURL = "https://api.redtube.com/"
 const APITimeout = 3
 
-func SearchVideos(search string) (RedtubeSearchResult) {
+func SearchVideos(search string) RedtubeSearchResult {
 	timeout := time.Duration(APITimeout * time.Second)
 	client := http.Client{
 		Timeout: timeout,
@@ -28,7 +28,7 @@ func SearchVideos(search string) (RedtubeSearchResult) {
 	return result
 }
 
-func GetVideoByID(ID string) (RedtubeSingleVideo) {
+func GetVideoByID(ID string) RedtubeSingleVideo {
 	resp, _ := http.Get(fmt.Sprintf(apiURL+"?data=redtube.Videos.getVideoById&video_id=%s&output=json", ID))
 	b, _ := ioutil.ReadAll(resp.Body)
 	var result RedtubeSingleVideo
@@ -39,7 +39,7 @@ func GetVideoByID(ID string) (RedtubeSingleVideo) {
 	return result
 }
 
-func GetVideoEmbedCode(ID string) (RedtubeEmbedCode) {
+func GetVideoEmbedCode(ID string) RedtubeEmbedCode {
 	resp, _ := http.Get(fmt.Sprintf(apiURL+"?data=redtube.Videos.getVideoEmbedCode&video_id=%s&output=json", ID))
 	b, _ := ioutil.ReadAll(resp.Body)
 	var result RedtubeEmbedCode
